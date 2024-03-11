@@ -1,29 +1,21 @@
-import { useEffect, useState } from "react";
-import { getHeroes } from "../api/heroes";
-import { Heroe } from "../types/typeHeroe";
+import { useHeroeContext } from "../context/HeroContext";
+import { HeroeItem } from "../components/HeroeItem";
 
 export const Home = () => {
-  const [heroes, setHeroes] = useState([]);
-
-  const getMarvelHeroes = async ():Promise<void> => {
-    const { data } = await getHeroes("batman");
-    setHeroes(data.results);
-    console.log(data.results);
-  };
-
-  useEffect(() => {
-    getMarvelHeroes();
-  }, []);
+  const { heroes, setHeroes } = useHeroeContext();
 
   return (
     <>
       <h1>Home</h1>
-      {heroes.map((heroe: Heroe) => (
-        <div key={heroe.id}>
-          <h1>{heroe.name}</h1>
-          <img src={heroe.image.url} alt={heroe.name} />
-        </div>
-      ))}
+
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`273`} />
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`2`} />
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`3`} /> 
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`4`} /> 
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`5`} /> 
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`6`} /> 
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`9`} /> 
+      <HeroeItem heroes={heroes} setHeroes={setHeroes} heroeid={`8`} /> 
     </>
   );
 };

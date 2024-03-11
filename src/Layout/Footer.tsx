@@ -1,6 +1,6 @@
 
 export const Footer = () => {
   return (
-    <footer>Footer</footer>
+    <footer className="py-2"></footer>
   )
 }
