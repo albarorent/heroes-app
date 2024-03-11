@@ -19,7 +19,6 @@ export const Header = () => {
             </span>
           </Link>
           <div className="flex md:order-2">
-         
             <button
               data-collapse-toggle="navbar-search"
               type="button"
@@ -84,21 +83,10 @@ export const Header = () => {
                     }`
                   }
                 >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/heroes"
-                  className={({ isActive }) =>
-                    `block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent ${
-                      isActive ? "md:text-blue-700  md:dark:text-blue-500" : ""
-                    }`
-                  }
-                >
                   Heroes
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   to="/search"
