@@ -16,6 +16,9 @@ export type Heroe = {
   image: {
     url: string;
   };
+  biography:{
+    alignment:string
+  }
 };
 
 export type HeroeContextType = {

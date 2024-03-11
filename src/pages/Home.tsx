@@ -18,7 +18,7 @@ export const Home = () => {
         <HeroeItem heroes={heroes} setHeroes={setHeroes} />
         <HeroeItem heroes={heroes} setHeroes={setHeroes} />
       </div>
-      /{" "}
+      
     </>
   );
 };

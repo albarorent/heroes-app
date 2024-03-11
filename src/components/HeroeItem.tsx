@@ -28,7 +28,9 @@ export const HeroeItem: React.FC<HeroeItemProps> = ({ heroes, setHeroes }) => {
             {heroes[randomHeroId]?.name}
           </h5>
         </span>
-
+        <p className="text-slate-100 pb-3">
+          {heroes[randomHeroId]?.biography?.alignment}
+        </p>
         <Link
           to={`heroe/${randomHeroId}`}
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

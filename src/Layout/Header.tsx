@@ -83,7 +83,7 @@ export const Header = () => {
                     }`
                   }
                 >
-                  Heroes
+                  Heroes / Villanos
                 </NavLink>
               </li>
 
