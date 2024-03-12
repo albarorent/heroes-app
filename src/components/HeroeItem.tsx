@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { Useheroe } from "../hooks/Useheroe";
+import { Useheroe, useError } from "../hooks/Useheroe";
 import { HeroeItemProps } from "../interfaces/HeroeInterface";
 import { Link } from "react-router-dom";
 
-export const HeroeItem: React.FC<HeroeItemProps> = ({ heroes, setHeroes }) => {
-  const { getMarvelHeroes } = Useheroe(setHeroes);
+export const HeroeItem: React.FC<HeroeItemProps> = ({
+  heroes,
+  setHeroes,
+  loading,
+  setLoading,
+}) => {
+  const { getMarvelHeroes } = Useheroe(setHeroes, setLoading);
+  const { handleImageError, imageError } = useError();
   const [randomHeroId, setRandomHeroId] = useState("");
 
   useEffect(() => {
@@ -13,14 +19,27 @@ export const HeroeItem: React.FC<HeroeItemProps> = ({ heroes, setHeroes }) => {
     getMarvelHeroes(randomId.toString());
   }, []);
 
+  if (loading) {
+    return <h1>Cargando...</h1>;
+  }
+
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 drop-shadow-xl">
       <span className="flex items-center justify-center">
-        <img
-          className="rounded-t-lg w-96 h-96 "
-          src={heroes[randomHeroId]?.image?.url}
-          alt={heroes[randomHeroId]?.name}
-        />
+        {imageError ? (
+          <img
+            className="rounded-t-lg w-96 h-96"
+            src="heroincongit.jpg"
+            alt="Imagen de repuesto"
+          />
+        ) : (
+          <img
+            className="rounded-t-lg w-96 h-96"
+            src={heroes[randomHeroId]?.image?.url}
+            alt={heroes[randomHeroId]?.name}
+            onError={handleImageError}
+          />
+        )}
       </span>
       <div className="p-5">
         <span>

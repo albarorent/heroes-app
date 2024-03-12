@@ -15,9 +15,10 @@ export const useHeroeContext = () => {
 
 export function HeroeProvider ({children}:any){
     const [heroes, setHeroes] = useState<HeroesState>({});
+    const [loading, setLoading] = useState(true);
 
     return(
-        <HeroeContext.Provider value={{heroes, setHeroes}}>
+        <HeroeContext.Provider value={{heroes, setHeroes, loading, setLoading}}>
             {children}
         </HeroeContext.Provider>
     )

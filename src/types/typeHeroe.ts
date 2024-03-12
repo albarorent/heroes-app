@@ -16,14 +16,14 @@ export type Heroe = {
   image: {
     url: string;
   };
-  biography:{
-    alignment:string
-  }
+  biography: {
+    alignment: string;
+  };
 };
 
 export type HeroeContextType = {
   heroes: any;
   setHeroes: React.Dispatch<React.SetStateAction<any>>;
+  loading: boolean;
+  setLoading:React.Dispatch<React.SetStateAction<any>>;
 };
-
-
