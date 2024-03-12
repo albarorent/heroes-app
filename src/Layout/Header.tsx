@@ -13,6 +13,7 @@ export const Header = () => {
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-8"
               alt="Flowbite Logo"
+              style={{width:"80px", height:"35px"}}
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Heroes App
