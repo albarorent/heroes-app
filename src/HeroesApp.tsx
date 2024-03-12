@@ -1,11 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
-// import { Home, Search, Heroe } from "./pages";
+import { Home, Search, Heroe } from "./pages";
 import { HeroeProvider } from "./context/HeroContext";
 import { LoginPage } from "./auth/pages/LoginPage";
-import { Home } from "./pages/Home";
-import { Search } from "./pages/Search";
-import { Heroe } from "./pages/Heroe";
+
 
 export const HeroesApp = () => {
   return (
