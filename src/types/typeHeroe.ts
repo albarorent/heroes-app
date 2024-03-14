@@ -25,5 +25,10 @@ export type HeroeContextType = {
   heroes: any;
   setHeroes: React.Dispatch<React.SetStateAction<any>>;
   loading: boolean;
-  setLoading:React.Dispatch<React.SetStateAction<any>>;
+  setLoading: React.Dispatch<React.SetStateAction<any>>;
+};
+
+export type AuthContextType = {
+  user: object;
+  setUser: React.Dispatch<React.SetStateAction<any>>;
 };

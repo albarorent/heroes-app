@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Useheroe, useError } from "../hooks/Useheroe";
+import { Useheroe, useImageError } from "../hooks/Useheroe";
 import { HeroeItemProps } from "../interfaces/HeroeInterface";
 import { Link } from "react-router-dom";
 
@@ -10,12 +10,13 @@ export const HeroeItem: React.FC<HeroeItemProps> = ({
   setLoading,
 }) => {
   const { getMarvelHeroes } = Useheroe(setHeroes, setLoading);
-  const { handleImageError, imageError } = useError();
+  const { handleImageError, imageError } = useImageError();
   const [randomHeroId, setRandomHeroId] = useState("");
 
   useEffect(() => {
     const randomId = Math.floor(Math.random() * 731) + 1;
     setRandomHeroId(randomId.toString());
+    setLoading(true);
     getMarvelHeroes(randomId.toString());
   }, []);
 

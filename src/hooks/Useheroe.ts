@@ -18,16 +18,37 @@ export const Useheroe = (setHeroes: any, setLoading: any) => {
   return { getMarvelHeroes };
 };
 
-export const useError = () => {
+export const useHeroeId = () => {
+  const getIdHeroes = (id: string | undefined) => axios(`${id}`);
+  const getIdMarvelHeroes = async (
+    id: string | undefined,
+    setHeroes: any,
+    setLoading: any
+  ) => {
+    const { data } = await getIdHeroes(id);
+    
+    if (data.response === "error") {
+      setHeroes({});
+      setLoading(false);
+    } else {
+      setHeroes(data);
+      setLoading(false);
+    }
+  };
+
+  return { getIdMarvelHeroes };
+};
+
+export const useImageError = () => {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
     setImageError(true);
   };
 
-  return{
+  return {
     handleImageError,
     imageError,
-    setImageError
-  }
-}
+    setImageError,
+  };
+};
