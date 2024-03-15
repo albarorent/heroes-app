@@ -7,6 +7,13 @@ export interface HeroeItemProps {
   setLoading: React.Dispatch<React.SetStateAction<any>>;
 }
 
+export interface HeroeIdProps {
+  heroes: { [key: string]: Heroe } | any;
+  id: string;
+  handleImageError: React.ReactEventHandler<HTMLImageElement> | undefined;
+  imageError: boolean;
+}
+
 export interface HeroesState {
   [key: string]: Heroe;
 }

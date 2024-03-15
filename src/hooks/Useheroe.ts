@@ -26,7 +26,7 @@ export const useHeroeId = () => {
     setLoading: any
   ) => {
     const { data } = await getIdHeroes(id);
-    
+
     if (data.response === "error") {
       setHeroes({});
       setLoading(false);
@@ -37,6 +37,18 @@ export const useHeroeId = () => {
   };
 
   return { getIdMarvelHeroes };
+};
+
+export const useHeroeSearch = (setHeroes: any) => {
+  const getSearchHeroe = (name: string) => axios(`/search/${name}`);
+  const getSearchMarvel = async (name: string) => {
+    const { data } = await getSearchHeroe(name);
+    setHeroes(data);
+  };
+
+  return {
+    getSearchMarvel,
+  };
 };
 
 export const useImageError = () => {

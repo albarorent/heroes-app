@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { useHeroeId } from "../hooks/Useheroe";
+import { useHeroeId, useImageError } from "../hooks/Useheroe";
 import { useEffect } from "react";
 import { useHeroeContext } from "../context/HeroContext";
 
@@ -7,6 +7,7 @@ export const Heroe = () => {
   const { heroes, setHeroes, loading, setLoading } = useHeroeContext();
   const { getIdMarvelHeroes } = useHeroeId();
   const { id } = useParams();
+  const { handleImageError, imageError } = useImageError();
 
   useEffect(() => {
     setLoading(true);
@@ -24,19 +25,34 @@ export const Heroe = () => {
   return (
     <div className="flex flex-col md:flex-row gap-8 py-10 px-10 sm:px-20 items-center justify-center">
       <div>
-        <img
-          style={{ width: "300px" }}
-          src={heroes?.image?.url}
-          alt={heroes?.name}
-          className="p-2 border border-black"
-        />
+        {imageError ? (
+          <img
+            style={{ width: "300px" }}
+            className="rounded-t-lg w-96 h-96"
+            src="/heroincongit.jpg"
+            alt="Imagen de repuesto"
+          />
+        ) : (
+          <img
+            style={{ width: "300px" }}
+            src={heroes?.image?.url}
+            alt={heroes?.name}
+            onError={handleImageError}
+            className="p-2 border border-black"
+          />
+        )}
       </div>
       <div className="flex flex-col gap-2 w-full ">
         <h1 className="text-3xl font-semibold">{heroes?.name}</h1>
         <hr />
         <h2 className="text-2xl font-semibold">Biografia</h2>
         <ul>
-          <li>Full Name: {heroes?.biography?.["full-name"]}</li>
+          <li>
+            Full Name:{" "}
+            {heroes?.biography?.["full-name"] == ""
+              ? "Not found"
+              : heroes?.biography?.["full-name"]}
+          </li>
           <li>Alignment: {heroes?.biography?.alignment}</li>
           <li>Alter Egos: {heroes?.biography?.["alter-egos"]}</li>
         </ul>

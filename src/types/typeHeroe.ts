@@ -1,4 +1,5 @@
 export type Heroe = {
+ 
   id: string;
   name: string;
   powerstats: {
@@ -19,6 +20,7 @@ export type Heroe = {
   biography: {
     alignment: string;
   };
+ 
 };
 
 export type HeroeContextType = {
