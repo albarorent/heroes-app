@@ -22,7 +22,7 @@ export const Heroe = () => {
   }
 
   return (
-    <div className=" flex gap-10 py-10 px-20">
+    <div className=" sm:flex gap-10 py-10 px-20">
       <div>
         <img
           style={{ width: "300px" }}
