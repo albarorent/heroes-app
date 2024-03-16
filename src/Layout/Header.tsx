@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context";
+import { AuthState } from "../interfaces/HeroeInterface";
 
 export const Header = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const navigate = useNavigate();
+  const { authState, logout } = useAuthContext();
+  const { user } = authState as AuthState;
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
 
   const onLogout = () => {
+    logout();
     navigate("/login");
   };
 
@@ -106,7 +111,7 @@ export const Header = () => {
                     "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
                   }
                 >
-                  Alvaro
+                  {user ? user.name : "User"}
                 </NavLink>
               </li>
 

@@ -1,7 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { AuthContextType } from "../types/typeHeroe";
+import { authReducer } from "./AuthReducer";
+import { types } from "../auth/types/types";
 
-const AuthsContext = createContext<AuthContextType| undefined>(undefined);
+const AuthsContext = createContext<AuthContextType | undefined>(undefined);
+
+const initialValue = {
+  logged: false,
+};
+
+const init = () => {
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+
+  return {
+    logged: !!user,
+    user: user,
+  };
+};
 
 export const useAuthContext = () => {
   const context = useContext(AuthsContext);
@@ -12,13 +28,30 @@ export const useAuthContext = () => {
   return context;
 };
 
+export function AuthProvider({ children }: any) {
+  const [authState, dispatch] = useReducer(authReducer, initialValue, init);
 
-export function AuthProvider ({children}:any){
-    const [user, setUser] = useState({})
+  const login = async (name:string = ""): Promise<void> => {
+    const user = { id: "ABC", name };
 
-    return(
-        <AuthsContext.Provider value={{user,setUser}}>
-            {children}
-        </AuthsContext.Provider>
-    )
+    const action = {
+      type: types.login,
+      payload: user,
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+    dispatch(action);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    const action = { type: types.logout };
+    dispatch(action);
+  };
+
+  return (
+    <AuthsContext.Provider value={{ authState, login: login, logout: logout }}>
+      {children}
+    </AuthsContext.Provider>
+  );
 }

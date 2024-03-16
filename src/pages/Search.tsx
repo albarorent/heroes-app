@@ -5,9 +5,6 @@ import { Heroe } from "../types/typeHeroe";
 import { useForm } from "../hooks/UseForm";
 import { FormEvent } from "react";
 
-
-
-
 export const Search = () => {
   const { heroes, setHeroes } = useHeroeContext();
   const { handleImageError, imageError } = useImageError();

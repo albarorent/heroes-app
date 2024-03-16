@@ -1,4 +1,4 @@
-import { Heroe } from "../types/typeHeroe";
+import { Heroe, UserType } from "../types/typeHeroe";
 
 export interface HeroeItemProps {
   heroes: { [key: string]: Heroe };
@@ -16,4 +16,9 @@ export interface HeroeIdProps {
 
 export interface HeroesState {
   [key: string]: Heroe;
+}
+
+export interface AuthState {
+  user: UserType; // UserType es el tipo de datos del usuario
+  logged:boolean
 }

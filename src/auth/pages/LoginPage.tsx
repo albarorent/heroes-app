@@ -1,17 +1,25 @@
-export const LoginPage = () => {
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context";
+import { useForm } from "../../hooks/UseForm";
 
-  const onLogin = (e:any):void => {
+export const LoginPage = () => {
+  const { login } = useAuthContext();
+  const navigate = useNavigate();
+
+  const { formState, onInputChange } = useForm({ nombre: "" });
+  const { nombre } = formState;
+
+  const onLogin = (e: any): void => {
     e.preventDefault();
-    
-  }
+
+    login(nombre);
+    navigate("/");
+  };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 h-lvh">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <span
-         
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
+        <span className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img
             className="w-8 h-8 mr-2"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
@@ -24,7 +32,7 @@ export const LoginPage = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Inicia sesion con tu nombre
             </h1>
-            <form className="space-y-4 md:space-y-6"  onSubmit={onLogin}>
+            <form className="space-y-4 md:space-y-6" onSubmit={onLogin}>
               <div>
                 <label
                   htmlFor="email"
@@ -34,11 +42,13 @@ export const LoginPage = () => {
                 </label>
                 <input
                   type="text"
-                  name="email"
-                  id="email"
+                  name="nombre"
+                  id="nombre"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Ingresa tu nombre"
                   required
+                  onChange={onInputChange}
+                  value={nombre}
                 />
               </div>
 

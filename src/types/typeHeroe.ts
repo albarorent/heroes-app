@@ -31,6 +31,12 @@ export type HeroeContextType = {
 };
 
 export type AuthContextType = {
-  user: object;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
+  login: () => Promise<void>;
+  authState: {};
+  logout: () => void;
 };
+
+export type UserType = {
+  id:string,
+  name:string
+}
