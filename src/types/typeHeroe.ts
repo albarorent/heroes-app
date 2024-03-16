@@ -31,7 +31,7 @@ export type HeroeContextType = {
 };
 
 export type AuthContextType = {
-  login: () => Promise<void>;
+  login: (name:string) => Promise<void>;
   authState: {};
   logout: () => void;
 };
@@ -40,3 +40,8 @@ export type UserType = {
   id:string,
   name:string
 }
+
+export type Action<T = any> = {
+  type: string;
+  payload?: T;
+};
