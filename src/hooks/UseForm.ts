@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-export const useForm = (initialForm = {}): object => {
+interface FormState {
+  [key: string]: string;
+}
+
+export const useForm = (initialForm: FormState = {}) => {
   const [formState, setFormState] = useState(initialForm);
 
-  const onInputChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>): void => {
+  const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
     setFormState({
       ...formState,
@@ -18,7 +20,7 @@ export const useForm = (initialForm = {}): object => {
   };
 
   return {
-    ...formState,
+    formState,
     onInputChange,
     onResetForm,
   };

@@ -1,22 +1,26 @@
-import { ChangeEvent, useState } from "react";
 import { useHeroeSearch, useImageError } from "../hooks/Useheroe";
 import { useHeroeContext } from "../context/HeroContext";
 import { HeroeCard } from "../components/HeroeCard";
 import { Heroe } from "../types/typeHeroe";
+import { useForm } from "../hooks/UseForm";
+import { FormEvent } from "react";
+
+
+
 
 export const Search = () => {
-  const [value, setValue] = useState("");
   const { heroes, setHeroes } = useHeroeContext();
   const { handleImageError, imageError } = useImageError();
-
+  const { formState, onInputChange } = useForm({ searchHeroe: "" });
+  const { searchHeroe } = formState;
   const { getSearchMarvel } = useHeroeSearch(setHeroes);
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value.trim());
-  };
 
-  const handleOnClick = () => {
-    if (value.length <= 2) return;
-    getSearchMarvel(value);
+  const onSearchSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (searchHeroe.trim().length <= 2) return;
+
+    getSearchMarvel(searchHeroe);
   };
 
   return (
@@ -24,20 +28,19 @@ export const Search = () => {
       <div className="py-10 pr-10 md:px-20">
         <h1 className="text-3xl pb-3">Search Heroe</h1>
         <hr />
-        <input
-          type="text"
-          name="searchHeroe"
-          placeholder="Ingresa un heroe"
-          className="mt-2 border border-slate-300 rounded-sm p-1 w-72"
-          onChange={onChange}
-          value={value}
-        />
-        <button
-          onClick={handleOnClick}
-          className="bg-teal-500 w-72 mt-2 rounded-sm p-2 text-slate-200 hover:bg-slate-50 hover:text-teal-500 hover:border border-teal-500"
-        >
-          Search
-        </button>
+        <form onSubmit={onSearchSubmit}>
+          <input
+            type="text"
+            name="searchHeroe"
+            placeholder="Ingresa un heroe"
+            className="mt-2 border border-slate-300 rounded-sm p-1 w-72"
+            onChange={onInputChange}
+            value={searchHeroe}
+          />
+          <button className="bg-teal-500 w-72 mt-2 rounded-sm p-2 text-slate-200 hover:bg-slate-50 hover:text-teal-500 hover:border border-teal-500">
+            Search
+          </button>
+        </form>
       </div>
       <div className="py-10 w-full md:pr-20">
         <h1 className="text-3xl pb-3">Resultado</h1>
