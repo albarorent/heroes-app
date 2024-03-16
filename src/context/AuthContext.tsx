@@ -2,21 +2,12 @@ import { createContext, useContext, useReducer } from "react";
 import { AuthContextType } from "../types/typeHeroe";
 import { authReducer } from "./AuthReducer";
 import { types } from "../auth/types/types";
+import { init } from "../helpers/helpers";
 
 const AuthsContext = createContext<AuthContextType | undefined>(undefined);
 
 const initialValue = {
   logged: false,
-};
-
-const init = () => {
-  const userString = localStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : null;
-
-  return {
-    logged: !!user,
-    user: user,
-  };
 };
 
 export const useAuthContext = () => {
@@ -31,7 +22,7 @@ export const useAuthContext = () => {
 export function AuthProvider({ children }: any) {
   const [authState, dispatch] = useReducer(authReducer, initialValue, init);
 
-  const login = async (name:string = ""): Promise<void> => {
+  const login = async (name: string = ""): Promise<void> => {
     const user = { id: "ABC", name };
 
     const action = {

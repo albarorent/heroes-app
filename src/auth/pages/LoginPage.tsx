@@ -11,9 +11,9 @@ export const LoginPage = () => {
 
   const onLogin = (e: any): void => {
     e.preventDefault();
-
+    const lastPath = localStorage.getItem("pathname") || "/";
     login(nombre);
-    navigate("/");
+    navigate(lastPath, { replace: true });
   };
 
   return (
